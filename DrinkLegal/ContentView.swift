@@ -30,7 +30,7 @@ struct ContentView: View {
                         }
                     })
                     .multilineTextAlignment(.center)
-                    .keyboardType(.numbersAndPunctuation)
+                    .keyboardType(.numberPad)
                     .padding(.horizontal, 100)
                     
                 
