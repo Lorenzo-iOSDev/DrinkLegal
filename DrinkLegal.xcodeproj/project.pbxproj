@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9C240BC12668BAE100BD688C /* DrinkLegalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240BC02668BAE100BD688C /* DrinkLegalViewModel.swift */; };
+		9C240BC32668D8A900BD688C /* HideKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C240BC22668D8A900BD688C /* HideKeyboard.swift */; };
 		9C2789D52665D99D00C3A2EB /* DrinkLegalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2789D42665D99D00C3A2EB /* DrinkLegalApp.swift */; };
 		9C2789D72665D99D00C3A2EB /* DrinkLegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2789D62665D99D00C3A2EB /* DrinkLegalView.swift */; };
 		9C2789D92665D99E00C3A2EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2789D82665D99E00C3A2EB /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		9C240BC02668BAE100BD688C /* DrinkLegalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkLegalViewModel.swift; sourceTree = "<group>"; };
+		9C240BC22668D8A900BD688C /* HideKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideKeyboard.swift; sourceTree = "<group>"; };
 		9C2789D12665D99D00C3A2EB /* DrinkLegal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrinkLegal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C2789D42665D99D00C3A2EB /* DrinkLegalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkLegalApp.swift; sourceTree = "<group>"; };
 		9C2789D62665D99D00C3A2EB /* DrinkLegalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkLegalView.swift; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				9C2789D82665D99E00C3A2EB /* Assets.xcassets */,
 				9C2789DD2665D99E00C3A2EB /* Info.plist */,
 				9C2789DA2665D99E00C3A2EB /* Preview Content */,
+				9C240BC22668D8A900BD688C /* HideKeyboard.swift */,
 			);
 			path = DrinkLegal;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C240BC32668D8A900BD688C /* HideKeyboard.swift in Sources */,
 				9C2789D72665D99D00C3A2EB /* DrinkLegalView.swift in Sources */,
 				9C2789D52665D99D00C3A2EB /* DrinkLegalApp.swift in Sources */,
 				9C240BC12668BAE100BD688C /* DrinkLegalViewModel.swift in Sources */,

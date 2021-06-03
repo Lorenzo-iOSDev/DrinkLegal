@@ -37,12 +37,16 @@ struct DrinkLegalView: View {
         } label: {
             ClearButton()
         }, alignment: .topTrailing)
+        .onTapGesture {
+            hideKeyboard()
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DrinkLegalView()
+            .preferredColorScheme(.dark)
     }
 }
 

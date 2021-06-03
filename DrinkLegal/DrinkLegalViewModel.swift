@@ -18,6 +18,7 @@ final class DrinkLegalViewModel: ObservableObject {
             birthDate.append("/")
         } else if string.count > characterLimit {
             birthDate = String(birthDate.prefix(characterLimit))
+            //animate textfield shake to show its full
         }
     }
     
