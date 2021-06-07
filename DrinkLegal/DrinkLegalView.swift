@@ -13,14 +13,14 @@ struct DrinkLegalView: View {
     
     var body: some View {
         ZStack {
-            Color("BackgroundDefault")
+            Color(.systemBackground)
                 .ignoresSafeArea()
             
             VStack(alignment: .center) {
                 TextField("DD/MM/YYYY", text: $viewModel.birthDate)
                     .font(.largeTitle)
-                    .onChange(of: viewModel.birthDate, perform: { dateString in
-                        viewModel.formatAndLimitDOBString(dateString)
+                    .onChange(of: viewModel.birthDate, perform: { value in
+                        viewModel.formatDOBString()
                     })
                     .multilineTextAlignment(.center)
                     .keyboardType(.numberPad)
@@ -46,7 +46,6 @@ struct DrinkLegalView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         DrinkLegalView()
-            .preferredColorScheme(.dark)
     }
 }
 
