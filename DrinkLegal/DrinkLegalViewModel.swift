@@ -7,28 +7,46 @@
 
 import SwiftUI
 
-enum Legality {
-    case Legal
-    case Illegal
-    case CheckLicense
+enum Legality: String {
+    case Legal = "checkmark"
+    case Illegal = "xmark"
+    case CheckLicense = "questionmark"
 }
 
 final class DrinkLegalViewModel: ObservableObject {
     
     @Published var birthDate = ""
-    @Published var result: Legality? = nil
+    @Published var result: Legality?
+    @Published var resultIsShowing: Bool = false
+    @Published var alertItem: AlertItem?
     
     let dateFormatter = DateFormatter()
     let characterLimit = 10
+    
+    var date: Date? = nil
+    var legalAge = Date().eighteenYearsAgo
+    
+    func compareDate() {
+        guard let date = date else { return } // return error alert
+        if date <= Date().eighteenYearsAgo {
+            print("Is of Age")
+            result = .Legal
+        } else if date > Date().eighteenYearsAgo {
+            print("Under Age")
+            result = .Illegal
+        }
+    }
     
     func convertStringToDate() {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         dateFormatter.timeZone = TimeZone.current
         
         if (!birthDate.isEmpty){
-            let date = dateFormatter.date(from: birthDate)
-            print(date!)
-            print(dateFormatter.string(from: date!))
+            date = dateFormatter.date(from: birthDate)
+            guard let date = date else { return } // return error alert
+            print(date)
+            print(dateFormatter.string(from: date))
+            resultIsShowing = true
         }
     }
     
@@ -40,6 +58,9 @@ final class DrinkLegalViewModel: ObservableObject {
             //animate textfield shake to show its full
         } else if birthDate.count == characterLimit {
             convertStringToDate()
+            compareDate()
+        } else if birthDate.count < characterLimit {
+            resultIsShowing = false
         }
     }
     

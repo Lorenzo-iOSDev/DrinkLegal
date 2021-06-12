@@ -30,6 +30,14 @@ struct DrinkLegalView: View {
                     .font(.title)
                     .fontWeight(.medium)
                     .padding()
+                
+                if (viewModel.resultIsShowing) {
+                    Image(systemName: viewModel.result!.rawValue)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
+                        .opacity(1.0)
+                }
             }
         }
         .overlay(Button {
@@ -37,8 +45,13 @@ struct DrinkLegalView: View {
         } label: {
             ClearButton()
         }, alignment: .topTrailing)
+        
         .onTapGesture {
             hideKeyboard()
+        }
+        
+        .alert(item: $viewModel.alertItem) { alertItem in
+            Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
         }
     }
 }
