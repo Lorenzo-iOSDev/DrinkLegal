@@ -24,18 +24,20 @@ final class DrinkLegalViewModel: ObservableObject {
     let dateFormatter = DateFormatter()
     let characterLimit = 10
     
-    var date: Date? = nil
+//    var date: Date? = nil
     var legalAge = Date().eighteenYearsAgo
     
     func compareDate() {
-        guard let date = date else { return } // return error alert
-        if date <= Date().eighteenYearsAgo {
+        //guard let date = birth else { return } // return error alert
+        if birthDate <= Date().eighteenYearsAgo {
             print("Is of Age")
             result = .Legal
-        } else if date > Date().eighteenYearsAgo {
+        } else if birthDate > Date().eighteenYearsAgo {
             print("Under Age")
             result = .Illegal
         }
+        
+        resultIsShowing = true
     }
     
 //    func convertStringToDate() {

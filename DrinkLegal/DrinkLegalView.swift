@@ -10,7 +10,6 @@ import SwiftUI
 struct DrinkLegalView: View {
     
     @StateObject var viewModel = DrinkLegalViewModel()
-    @State private var date = Date()
     
     var body: some View {
         ZStack {
@@ -42,9 +41,17 @@ struct DrinkLegalView: View {
                 
                 DatePicker("", selection: $viewModel.birthDate, in: Date().oneHundredYearsAgo...Date(), displayedComponents: [.date])
                     .labelsHidden()
-                    .onChange(of: viewModel.birthDate, perform: { value in
-                        viewModel.compareDate()
-                    })
+                    .clipped()
+                    .padding()
+                
+                Spacer()
+                    .frame(maxHeight: 50)
+                
+                Button {
+                    viewModel.compareDate()
+                } label: {
+                    ConfirmButton()
+                }
                 
             }
         }
@@ -68,6 +75,17 @@ struct ClearButton: View {
     
     var body: some View {
         Image(systemName: "clear")
+            .imageScale(.large)
+            .frame(width: 30, height: 30)
+            .foregroundColor(.primary)
+            .padding()
+    }
+}
+
+struct ConfirmButton: View {
+    
+    var body: some View {
+        Image(systemName: "magnifyingglass.circle")
             .imageScale(.large)
             .frame(width: 30, height: 30)
             .foregroundColor(.primary)
