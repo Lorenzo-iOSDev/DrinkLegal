@@ -17,19 +17,62 @@ struct DrinkLegalView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .center) {
-                TextField("DD/MM/YYYY", text: $viewModel.birthDate)
-                    .font(.largeTitle)
-                    .onChange(of: viewModel.birthDate, perform: { value in
-                        viewModel.formatDOBString()
-                    })
-                    .multilineTextAlignment(.center)
-                    .keyboardType(.numberPad)
-                    .padding(.horizontal, 100)
+//                TextField("DD/MM/YYYY", text: $viewModel.birthDate)
+//                    .font(.largeTitle)
+//                    .onChange(of: viewModel.birthDate, perform: { value in
+//                        viewModel.formatDOBString()
+//                    })
+//                    .multilineTextAlignment(.center)
+//                    .keyboardType(.numberPad)
+//                    .padding(.horizontal, 100)
+                
+                HStack(alignment: .center) {
+                    TextField("DD", text: $viewModel.birthDay)
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .frame(width: 65)
+                        .onChange(of: viewModel.birthDay, perform: { value in
+                            viewModel.formatDOBString(dateType: .Day)
+                        })
+                    
+                    Text("/")
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                    
+                    TextField("MM", text: $viewModel.birthMonth)
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .frame(width: 65)
+                        .onChange(of: viewModel.birthMonth, perform: { value in
+                            viewModel.formatDOBString(dateType: .Month)
+                        })
+                    
+                    Text("/")
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                    
+                    TextField("YYYY", text: $viewModel.birthYear)
+                        .font(.largeTitle)
+                        .multilineTextAlignment(.center)
+                        .keyboardType(.numberPad)
+                        .frame(width: 100)
+                        .onChange(of: viewModel.birthYear, perform: { value in
+                            viewModel.formatDOBString(dateType: .Year)
+                        })
+                }
                     
                 Text("Enter Birthdate")
                     .font(.title)
                     .fontWeight(.medium)
                     .padding()
+                
+                Button {
+                    viewModel.validDateCheck()
+                } label: {
+                    CheckButton()
+                }
                 
                 if (viewModel.resultIsShowing) {
                     Image(systemName: viewModel.result!.rawValue)
@@ -66,6 +109,17 @@ struct ClearButton: View {
     
     var body: some View {
         Image(systemName: "clear")
+            .imageScale(.large)
+            .frame(width: 30, height: 30)
+            .foregroundColor(.primary)
+            .padding()
+    }
+}
+
+struct CheckButton: View {
+    
+    var body: some View {
+        Image(systemName: "magnifyingglass")
             .imageScale(.large)
             .frame(width: 30, height: 30)
             .foregroundColor(.primary)
