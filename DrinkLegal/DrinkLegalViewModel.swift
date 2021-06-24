@@ -21,10 +21,17 @@ enum DateType {
 
 final class DrinkLegalViewModel: ObservableObject {
     
-    @Published var birthDate = ""
+    @Published var isShowingSettingsView = false
+    
     @Published var result: Legality?
-    @Published var resultIsShowing: Bool = false
     @Published var alertItem: AlertItem?
+    @Published var resultIsShowing: Bool = false
+    @Published var swapDateAndMonth: Bool = false {
+        didSet {
+            clearDOBString()
+            UserDefaults.standard.set(swapDateAndMonth, forKey: "DateMonthSetting")
+        }
+    }
     
     @Published var birthDay = ""
     @Published var birthMonth = ""
@@ -36,6 +43,19 @@ final class DrinkLegalViewModel: ObservableObject {
     var date: Date? = nil
     var legalAge = Date().eighteenYearsAgo
     
+    var birthDate: String {
+        birthDay + "/" + birthMonth + "/" + birthYear
+    }
+    
+    func showSettingsView() { isShowingSettingsView = true }
+    
+    func submitButtonPressed() {
+        if (validDateCheck()) {
+            convertStringToDate()
+            compareDate()
+        }
+    }
+    
     func compareDate() {
         guard let date = date else { return } // return error alert
         if date <= Date().eighteenYearsAgo {
@@ -45,34 +65,24 @@ final class DrinkLegalViewModel: ObservableObject {
             print("Under Age")
             result = .Illegal
         }
+        
+        resultIsShowing = true
+        
     }
     
     func convertStringToDate() {
         dateFormatter.dateFormat = "dd/MM/yyyy"
         dateFormatter.timeZone = TimeZone.current
         
-        if (!birthDate.isEmpty){
+         if (!birthDate.isEmpty){
             date = dateFormatter.date(from: birthDate)
             guard let date = date else { return } // return error alert
             print(date)
             print(dateFormatter.string(from: date))
-            resultIsShowing = true
         }
     }
     
     func formatDOBString(dateType: DateType) {
-//        if birthDate.count == 2 || birthDate.count == 5 {
-//            birthDate.append("/")
-//        } else if birthDate.count > characterLimit {
-//            birthDate = String(birthDate.prefix(characterLimit))
-//            //animate textfield shake to show its full
-//        } else if birthDate.count == characterLimit {
-//            convertStringToDate()
-//            compareDate()
-//        } else if birthDate.count < characterLimit {
-//            resultIsShowing = false
-//        }
-        
         switch dateType {
         case .Day:
             if birthDay.count > 2 {
@@ -89,18 +99,29 @@ final class DrinkLegalViewModel: ObservableObject {
         }
     }
     
-    func validDateCheck() {
-        //add guard let to unwrap
-        
-        if Int(birthDay)! > 31 || Int(birthMonth)! > 12 {
+    func validDateCheck() -> Bool {
+        guard let birthDayInt = Int(birthDay), let birthMonthInt = Int(birthMonth) else {
             alertItem = AlertContext.invalidBirthDate
+            return false
+        }
+        
+        if birthDayInt > 31 || birthMonthInt > 12  || birthYear.count < 4{
+            alertItem = AlertContext.invalidBirthDate
+            return false
+        } else {
+            return true
         }
     }
     
     func clearDOBString() {
-        //birthDate = ""
+        resultIsShowing = false
+        
         birthDay = ""
         birthMonth = ""
         birthYear = ""
+    }
+    
+    init() {
+        self.swapDateAndMonth = UserDefaults.standard.object(forKey: "DateMonthSetting") as? Bool ?? false
     }
 }

@@ -17,36 +17,27 @@ struct DrinkLegalView: View {
                 .ignoresSafeArea()
             
             VStack(alignment: .center) {
-//                TextField("DD/MM/YYYY", text: $viewModel.birthDate)
-//                    .font(.largeTitle)
-//                    .onChange(of: viewModel.birthDate, perform: { value in
-//                        viewModel.formatDOBString()
-//                    })
-//                    .multilineTextAlignment(.center)
-//                    .keyboardType(.numberPad)
-//                    .padding(.horizontal, 100)
-                
-                HStack(alignment: .center) {
-                    TextField("DD", text: $viewModel.birthDay)
+                HStack(alignment: .center) { //Refactor HStack into its own view struct
+                    TextField(viewModel.swapDateAndMonth ? "MM" : "DD", text: viewModel.swapDateAndMonth ? $viewModel.birthMonth : $viewModel.birthDay)
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
                         .keyboardType(.numberPad)
                         .frame(width: 65)
-                        .onChange(of: viewModel.birthDay, perform: { value in
-                            viewModel.formatDOBString(dateType: .Day)
+                        .onChange(of: viewModel.swapDateAndMonth ? viewModel.birthMonth : viewModel.birthDay, perform: { value in
+                            viewModel.formatDOBString(dateType: viewModel.swapDateAndMonth ? .Month : .Day)
                         })
                     
                     Text("/")
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
                     
-                    TextField("MM", text: $viewModel.birthMonth)
+                    TextField(viewModel.swapDateAndMonth ? "DD" : "MM", text: viewModel.swapDateAndMonth ? $viewModel.birthDay : $viewModel.birthMonth)
                         .font(.largeTitle)
                         .multilineTextAlignment(.center)
                         .keyboardType(.numberPad)
                         .frame(width: 65)
-                        .onChange(of: viewModel.birthMonth, perform: { value in
-                            viewModel.formatDOBString(dateType: .Month)
+                        .onChange(of: viewModel.swapDateAndMonth ? viewModel.birthDay : viewModel.birthMonth, perform: { value in
+                            viewModel.formatDOBString(dateType: viewModel.swapDateAndMonth ? .Day : .Month)
                         })
                     
                     Text("/")
@@ -63,35 +54,50 @@ struct DrinkLegalView: View {
                         })
                 }
                     
-                Text("Enter Birthdate")
-                    .font(.title)
-                    .fontWeight(.medium)
-                    .padding()
-                
-                Button {
-                    viewModel.validDateCheck()
-                } label: {
-                    CheckButton()
-                }
-                
                 if (viewModel.resultIsShowing) {
                     Image(systemName: viewModel.result!.rawValue)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
                         .opacity(1.0)
+                        .padding()
+                } else {
+                    Text("Enter Birthdate")
+                        .font(.title)
+                        .fontWeight(.medium)
+                        .padding()
+                }
+                
+                Button {
+                    withAnimation {
+                        viewModel.submitButtonPressed()
+                    }
+                } label: {
+                    CheckButton()
                 }
             }
         }
         .overlay(Button {
-            viewModel.clearDOBString()
+            withAnimation {
+                viewModel.clearDOBString()
+            }
         } label: {
             ClearButton()
         }, alignment: .topTrailing)
         
+        .overlay(Button {
+            viewModel.showSettingsView()
+        } label: {
+            GearButton()
+        }, alignment: .topLeading)
+        
         .onTapGesture {
             hideKeyboard()
         }
+        
+        .sheet(isPresented: $viewModel.isShowingSettingsView, content: {
+            DrinkLegalSettingsView(viewModel: viewModel)
+        })
         
         .alert(item: $viewModel.alertItem) { alertItem in
             Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
@@ -109,6 +115,17 @@ struct ClearButton: View {
     
     var body: some View {
         Image(systemName: "clear")
+            .imageScale(.large)
+            .frame(width: 30, height: 30)
+            .foregroundColor(.primary)
+            .padding()
+    }
+}
+
+struct GearButton: View {
+    
+    var body: some View {
+        Image(systemName: "gearshape")
             .imageScale(.large)
             .frame(width: 30, height: 30)
             .foregroundColor(.primary)

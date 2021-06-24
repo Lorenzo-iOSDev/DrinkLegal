@@ -13,8 +13,10 @@
 		9C2789D72665D99D00C3A2EB /* DrinkLegalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C2789D62665D99D00C3A2EB /* DrinkLegalView.swift */; };
 		9C2789D92665D99E00C3A2EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2789D82665D99E00C3A2EB /* Assets.xcassets */; };
 		9C2789DC2665D99E00C3A2EB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C2789DB2665D99E00C3A2EB /* Preview Assets.xcassets */; };
+		9C4A3F7226836315005E1DB6 /* DrinkLegalSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4A3F7126836315005E1DB6 /* DrinkLegalSettingsView.swift */; };
 		9C8C83C4266DE95F006D30A7 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8C83C3266DE95F006D30A7 /* Date+Ext.swift */; };
 		9CD4B3052674CC7F008A6F97 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD4B3042674CC7E008A6F97 /* Alert.swift */; };
+		9CE14B5526840438009A42EE /* XDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE14B5426840438009A42EE /* XDismissButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +28,10 @@
 		9C2789D82665D99E00C3A2EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C2789DB2665D99E00C3A2EB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9C2789DD2665D99E00C3A2EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C4A3F7126836315005E1DB6 /* DrinkLegalSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkLegalSettingsView.swift; sourceTree = "<group>"; };
 		9C8C83C3266DE95F006D30A7 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		9CD4B3042674CC7E008A6F97 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		9CE14B5426840438009A42EE /* XDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDismissButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,8 @@
 				9C240BC22668D8A900BD688C /* HideKeyboard.swift */,
 				9C8C83C3266DE95F006D30A7 /* Date+Ext.swift */,
 				9CD4B3042674CC7E008A6F97 /* Alert.swift */,
+				9C4A3F7126836315005E1DB6 /* DrinkLegalSettingsView.swift */,
+				9CE14B5426840438009A42EE /* XDismissButton.swift */,
 			);
 			path = DrinkLegal;
 			sourceTree = "<group>";
@@ -151,11 +157,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CD4B3052674CC7F008A6F97 /* Alert.swift in Sources */,
+				9C4A3F7226836315005E1DB6 /* DrinkLegalSettingsView.swift in Sources */,
 				9C240BC32668D8A900BD688C /* HideKeyboard.swift in Sources */,
 				9C2789D72665D99D00C3A2EB /* DrinkLegalView.swift in Sources */,
 				9C2789D52665D99D00C3A2EB /* DrinkLegalApp.swift in Sources */,
 				9C240BC12668BAE100BD688C /* DrinkLegalViewModel.swift in Sources */,
 				9C8C83C4266DE95F006D30A7 /* Date+Ext.swift in Sources */,
+				9CE14B5526840438009A42EE /* XDismissButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
