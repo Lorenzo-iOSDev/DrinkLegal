@@ -10,7 +10,6 @@ import SwiftUI
 enum Legality: String {
     case Legal = "checkmark"
     case Illegal = "xmark"
-    case CheckLicense = "questionmark"
 }
 
 enum DateType {
@@ -59,10 +58,8 @@ final class DrinkLegalViewModel: ObservableObject {
     func compareDate() {
         guard let date = date else { return } // return error alert
         if date <= Date().eighteenYearsAgo {
-            print("Is of Age")
             result = .Legal
         } else if date > Date().eighteenYearsAgo {
-            print("Under Age")
             result = .Illegal
         }
         
@@ -76,9 +73,6 @@ final class DrinkLegalViewModel: ObservableObject {
         
          if (!birthDate.isEmpty){
             date = dateFormatter.date(from: birthDate)
-            guard let date = date else { return } // return error alert
-            print(date)
-            print(dateFormatter.string(from: date))
         }
     }
     

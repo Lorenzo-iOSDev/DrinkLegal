@@ -22,8 +22,11 @@ struct DrinkLegalSettingsView: View {
                     }
                     
                     Section(header: Text("About this App")) {
-                        Text("Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder Placeholder PlaceholderPlaceholder Placeholder Placeholder Placeholder")
-                            .multilineTextAlignment(.center)
+                        HStack {
+                            Text("DrinkLegal was made by Lorenzo Zemp \n as a practice app to get used to swiftUI. \n \n Thank you for checking out this app.")
+                                .multilineTextAlignment(.center)
+                                .padding()
+                        }
                     }
                 }
                 .navigationTitle("Settings")
